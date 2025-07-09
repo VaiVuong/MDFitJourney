@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDFitJourney.Pages.RoutineEditPage"
+             BackgroundColor="#2D2D2D"
+             Title="{Binding Day}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Top Menu -->
+        <Grid Padding="10" BackgroundColor="#2D2D2D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="avatar.png" WidthRequest="32" HeightRequest="32"/>
+            <Label Grid.Column="1"
+                   Text="FitJourney"
+                   FontSize="20"
+                   TextColor="#bbdf32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+            <Image Grid.Column="2" Source="bell.png" WidthRequest="24"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <VerticalStackLayout Spacing="15">
+
+                <Label Text="{Binding Day}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+
+                <!-- exercises list -->
+                <Label Text="PLEASE IMPLEMENT PER DAY EXERCISE LIST (NEED EDIT BUTTON)"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Menu -->
+        <Grid Grid.Row="2" BackgroundColor="Black" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="hamburger.png"
+                         Command="{Binding OpenMenuCommand}"
+                         Grid.Column="0"/>
+            <ImageButton Source="bookmark.png"
+                         Grid.Column="1"/>
+            <ImageButton Source="addweight.png"
+                         Command="{Binding AddWeightCommand}"
+                         Grid.Column="2"/>
+            <ImageButton Source="chart.png"
+                         Command="{Binding GoToWeightTrackerCommand}"
+                         Grid.Column="3"/>
+            <ImageButton Source="info.png"
+                         Command="{Binding GoToInfoCommand}"
+                         Grid.Column="4"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>

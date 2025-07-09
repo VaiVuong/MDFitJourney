@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="MDFitJourney.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MDFitJourney"
-    Title="MDFitJourney">
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MDFitJourney"
+       xmlns:pages="clr-namespace:MDFitJourney.Pages"
+       x:Class="MDFitJourney.AppShell">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" />
+    <ShellContent Title="Routine Builder" ContentTemplate="{DataTemplate pages:RoutineBuilderPage}" />
+    <ShellContent Title="Routine Edit" ContentTemplate="{DataTemplate pages:RoutineEditPage}" />
+    <ShellContent Title="Weight Tracker" ContentTemplate="{DataTemplate pages:WeightTrackerPage}" />
+    <ShellContent Title="Information" ContentTemplate="{DataTemplate pages:InformationPage}" />
 </Shell>
