@@ -3,11 +3,11 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MDFitJourney"
        xmlns:pages="clr-namespace:MDFitJourney.Pages"
-       x:Class="MDFitJourney.AppShell">
+       x:Class="MDFitJourney.AppShell"
+       x:Name="MDShell">
 
     <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" />
     <ShellContent Title="Routine Builder" ContentTemplate="{DataTemplate pages:RoutineBuilderPage}" />
-    <ShellContent Title="Routine Edit" ContentTemplate="{DataTemplate pages:RoutineEditPage}" />
     <ShellContent Title="Weight Tracker" ContentTemplate="{DataTemplate pages:WeightTrackerPage}" />
     <ShellContent Title="Information" ContentTemplate="{DataTemplate pages:InformationPage}" />
 </Shell>

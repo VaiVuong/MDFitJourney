@@ -1,48 +1,76 @@
 ﻿using MDFitJourney.Pages;
+using MDFitJourney.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
-namespace MDFitJourney.ViewModels;
-
-public class MainPageViewModel
+namespace MDFitJourney.ViewModels
 {
-    public string CurrentDay { get; set; } = DateTime.Now.DayOfWeek.ToString();
-    public string CurrentRoutine { get; set; } = "Chest / Tricep";
-
-    public Command GoToRoutineBuilderCommand { get; }
-    public Command GoToWeightTrackerCommand { get; }
-    public Command OpenMenuCommand { get; }
-    public Command AddWeightCommand { get; }
-    public Command GoToInfoCommand { get; }
-
-    public MainPageViewModel()
+    public class MainPageViewModel : INotifyPropertyChanged
     {
-        GoToRoutineBuilderCommand = new Command(async () =>
-        {
-            await Shell.Current.GoToAsync(nameof(RoutineBuilderPage));
-        });
+        private string currentDay = DateTime.Now.DayOfWeek.ToString();
 
-        GoToWeightTrackerCommand = new Command(async () =>
-        {
-            await Shell.Current.GoToAsync(nameof(WeightTrackerPage));
-        });
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        OpenMenuCommand = new Command(() =>
+        public string CurrentDay
         {
-            // future humburger button
-        });
+            get => currentDay;
+            set
+            {
+                if (currentDay != value)
+                {
+                    currentDay = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CurrentRoutine)); // Update routine when day changes
+                }
+            }
+        }
 
-        AddWeightCommand = new Command(async () =>
+        public string CurrentRoutine
         {
-            await Shell.Current.GoToAsync(nameof(WeightTrackerPage));
-        });
+            get
+            {
+                var routineDay = RoutineService.Instance.GetRoutineForDay(CurrentDay);
+                return routineDay?.Title ?? "No Routine Set";
+            }
+        }
 
-        GoToInfoCommand = new Command(async () =>
+        public ICommand GoToRoutineBuilderCommand { get; }
+        public ICommand GoToWeightTrackerCommand { get; }
+        public ICommand GoToHomeCommand { get; }
+        public ICommand AddWeightCommand { get; }
+        public ICommand GoToInfoCommand { get; }
+
+        public MainPageViewModel()
         {
-            await Shell.Current.GoToAsync(nameof(InformationPage));
-        });
+            GoToRoutineBuilderCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(RoutineBuilderPage));
+            });
+
+            GoToWeightTrackerCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(WeightTrackerPage));
+            });
+
+            GoToHomeCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(MainPage));
+            });
+
+            AddWeightCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(WeightTrackerPage));
+            });
+
+            GoToInfoCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(InformationPage));
+            });
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

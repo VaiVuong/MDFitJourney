@@ -1,9 +1,46 @@
-namespace MDFitJourney.Pages;
+using System;
+using System.Globalization;
+using Microsoft.Maui.Controls;
 
-public partial class RoutineBuilderPage : ContentPage
+namespace MDFitJourney.Pages
 {
-    public RoutineBuilderPage()
+    public partial class RoutineBuilderPage : ContentPage
     {
-        InitializeComponent();
+        public RoutineBuilderPage()
+        {
+            InitializeComponent();
+        }
+        private async void GoToHome_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(MainPage));
+        }
+
+        private async void AddWeight_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(WeightTrackerPage));
+        }
+
+        private async void GoToWeightTracker_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(WeightTrackerPage));
+        }
+
+        private async void GoToInfo_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(InformationPage));
+        }
+    }
+
+    public class BoolToEditTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)value ? "Done" : "Edit";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -77,7 +77,7 @@
             </Grid.ColumnDefinitions>
 
             <ImageButton Source="hamburger.png"
-                         Command="{Binding OpenMenuCommand}"
+                         Command="{Binding GoToHomeCommand}"
                          Grid.Column="0"/>
             <ImageButton Source="bookmark.png"
                          Grid.Column="1"/>

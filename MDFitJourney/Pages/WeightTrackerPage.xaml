@@ -47,20 +47,19 @@
             </Grid.ColumnDefinitions>
 
             <ImageButton Source="hamburger.png"
-                         Command="{Binding OpenMenuCommand}"
-                         Grid.Column="0"/>
+                 Clicked="GoToHome_Clicked"
+                 Grid.Column="0"/>
             <ImageButton Source="bookmark.png"
-                         Grid.Column="1"/>
+                 Grid.Column="1"/>
             <ImageButton Source="addweight.png"
-                         Command="{Binding AddWeightCommand}"
-                         Grid.Column="2"/>
+                 Clicked="AddWeight_Clicked"
+                 Grid.Column="2"/>
             <ImageButton Source="chart.png"
-                         Command="{Binding GoToWeightTrackerCommand}"
-                         Grid.Column="3"/>
+                 Clicked="GoToWeightTracker_Clicked"
+                 Grid.Column="3"/>
             <ImageButton Source="info.png"
-                         Command="{Binding GoToInfoCommand}"
-                         Grid.Column="4"/>
+                 Clicked="GoToInfo_Clicked"
+                 Grid.Column="4"/>
         </Grid>
-
     </Grid>
 </ContentPage>

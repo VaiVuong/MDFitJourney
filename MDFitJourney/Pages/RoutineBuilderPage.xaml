@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:MDFitJourney.ViewModels"
-             x:Class="MDFitJourney.Pages.RoutineBuilderPage"
-             x:Name="ThisPage"
-             BackgroundColor="#2D2D2D"
-             Title="Routine Builder">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MDFitJourney.ViewModels"
+    xmlns:local="clr-namespace:MDFitJourney.Pages"
+    x:Class="MDFitJourney.Pages.RoutineBuilderPage"
+    x:Name="ThisPage"
+    BackgroundColor="#2D2D2D"
+    Title="Routine Builder">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToEditTextConverter x:Key="BoolToEditTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <vm:RoutineBuilderViewModel/>
@@ -37,30 +45,107 @@
                 <CollectionView ItemsSource="{Binding Days}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame CornerRadius="12"
-                                   BackgroundColor="#7a7a7a"
-                                   Padding="10">
-                                <Grid>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding BindingContext.DayTappedCommand, Source={x:Reference ThisPage}}" 
-                                            CommandParameter="{Binding DayName}" />
-                                    </Grid.GestureRecognizers>
+                            <Frame CornerRadius="12" BackgroundColor="#7a7a7a" Padding="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding BindingContext.DayTappedCommand, Source={x:Reference ThisPage}}"
+                                    CommandParameter="{Binding DayName}" />
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout>
 
-                                    <VerticalStackLayout>
+                                    <!-- Tappable Day Name -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
                                         <Label Text="{Binding DayName}"
                                                FontSize="18"
                                                TextColor="#BBDF32"
-                                               HorizontalOptions="Center"/>
-                                        <Label Text="{Binding Title}"
-                                               FontSize="14"
+                                               HorizontalOptions="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding BindingContext.DayTappedCommand, Source={x:Reference ThisPage}}"
+                                                    CommandParameter="{Binding DayName}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Button Text="{Binding IsEditing, Converter={StaticResource BoolToEditTextConverter}}"
+                                                Command="{Binding ToggleEditCommand}"
+                                                Grid.Column="1"
+                                                BackgroundColor="#bbdf32"
+                                                TextColor="Black"
+                                                FontAttributes="Bold" />
+                                    </Grid>
+                                    <!-- ROUTINE TITLE -->
+                                    <Entry Text="{Binding Title}"
+                                               Placeholder="Routine Title"
                                                TextColor="White"
-                                               HorizontalOptions="Center"/>
+                                               IsEnabled="{Binding IsEditing}" />
+                                    <!-- Expanded Section -->
+                                    <VerticalStackLayout IsVisible="{Binding IsExpanded}" Spacing="10">
+                                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" Padding="5" ColumnSpacing="10">
+                                            <Label Text="Exercise" TextColor="#bbdf32" Grid.Column="0" />
+                                            <Label Text="Sets" TextColor="#bbdf32" Grid.Column="1" HorizontalTextAlignment="Center" />
+                                            <Label Text="Reps" TextColor="#bbdf32" Grid.Column="2" HorizontalTextAlignment="Center" />
+                                            <Label Text="Weight" TextColor="#bbdf32" Grid.Column="3" HorizontalTextAlignment="Center" />
+                                        </Grid>
+
+                                        <CollectionView ItemsSource="{Binding Exercises}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Padding="5" ColumnSpacing="10">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="2*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Entry Placeholder="Exercise Name"
+                                                               Text="{Binding ExerciseName}"
+                                                               TextColor="White"
+                                                               IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:RoutineDay}}, Path=IsEditing}" />
+
+                                                        <Entry Placeholder="Sets"
+                                                               Text="{Binding Sets}"
+                                                               Keyboard="Numeric"
+                                                               WidthRequest="50"
+                                                               Grid.Column="1"
+                                                               IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:RoutineDay}}, Path=IsEditing}" />
+
+                                                        <Entry Placeholder="Reps"
+                                                               Text="{Binding Reps}"
+                                                               Keyboard="Numeric"
+                                                               WidthRequest="50"
+                                                               Grid.Column="2"
+                                                               IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:RoutineDay}}, Path=IsEditing}" />
+
+                                                        <Entry Placeholder="Weight (lbs)"
+                                                               Text="{Binding Weight}"
+                                                               Keyboard="Numeric"
+                                                               WidthRequest="70"
+                                                               Grid.Column="3"
+                                                               IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:RoutineDay}}, Path=IsEditing}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
+                                        <Button Text="Add Exercise"
+                                                Command="{Binding BindingContext.AddExerciseCommand, Source={x:Reference ThisPage}}"
+                                                CommandParameter="{Binding}"
+                                                BackgroundColor="#bbdf32"
+                                                TextColor="Black"
+                                                FontAttributes="Bold"
+                                                IsVisible="{Binding IsEditing}" />
                                     </VerticalStackLayout>
-                                </Grid>
+                                </VerticalStackLayout>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+
                 </CollectionView>
 
                 <Button Text="Save All"
@@ -82,20 +167,19 @@
             </Grid.ColumnDefinitions>
 
             <ImageButton Source="hamburger.png"
-                         Command="{Binding OpenMenuCommand}"
-                         Grid.Column="0"/>
+                 Clicked="GoToHome_Clicked"
+                 Grid.Column="0"/>
             <ImageButton Source="bookmark.png"
-                         Grid.Column="1"/>
+                 Grid.Column="1"/>
             <ImageButton Source="addweight.png"
-                         Command="{Binding AddWeightCommand}"
-                         Grid.Column="2"/>
+                 Clicked="AddWeight_Clicked"
+                 Grid.Column="2"/>
             <ImageButton Source="chart.png"
-                         Command="{Binding GoToWeightTrackerCommand}"
-                         Grid.Column="3"/>
+                 Clicked="GoToWeightTracker_Clicked"
+                 Grid.Column="3"/>
             <ImageButton Source="info.png"
-                         Command="{Binding GoToInfoCommand}"
-                         Grid.Column="4"/>
+                 Clicked="GoToInfo_Clicked"
+                 Grid.Column="4"/>
         </Grid>
-
     </Grid>
 </ContentPage>
