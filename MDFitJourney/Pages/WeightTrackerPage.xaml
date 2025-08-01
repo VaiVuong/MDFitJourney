@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MDFitJourney.ViewModels"
              x:Class="MDFitJourney.Pages.WeightTrackerPage"
              BackgroundColor="#2D2D2D"
              Title="Weight Tracker">
+
+    <ContentPage.BindingContext>
+        <vm:WeightTrackerViewModel/>
+    </ContentPage.BindingContext>
 
     <Grid RowDefinitions="Auto,*,Auto">
 
@@ -27,12 +32,96 @@
 
         <!-- Main Content -->
         <ScrollView Grid.Row="1" Padding="20">
-            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <!--IMPLEMENT TRACKER CHART SOMEHOW-->
-                <Label Text="PLEASE IMPLEMENT WEIGHT TRACKER CHART"
-                       TextColor="White"
-                       FontSize="18"
-                       HorizontalOptions="Center" />
+            <VerticalStackLayout Spacing="25" HorizontalOptions="Center" VerticalOptions="Start">
+                
+                <!-- Section for adding or editing a weight entry -->
+                <Frame CornerRadius="12" BackgroundColor="#7a7a7a" Padding="20" WidthRequest="350">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Log or Edit Your Weight"
+                               TextColor="#bbdf32"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                        
+                        <!-- Date Picker to allow user to choose the date -->
+                        <DatePicker Date="{Binding SelectedDate}"
+                                    TextColor="#bbdf32"
+                                    FontSize="16"
+                                    HorizontalOptions="Center"/>
+                                    
+                        <!-- Weight input field -->
+                        <Entry Placeholder="Enter Weight (in lbs)"
+                               PlaceholderColor="LightGray"
+                               TextColor="White"
+                               Keyboard="Numeric"
+                               FontSize="16"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding CurrentWeight}"/>
+                        
+                        <!-- Button to save the new weight or update an existing one. -->
+                        <Button Text="Save Weight"
+                                Command="{Binding SaveWeightCommand}"
+                                BackgroundColor="#bbdf32"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                CornerRadius="8" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Section to display the chart placeholder and weight history -->
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Weight Progress"
+                           TextColor="#bbdf32"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"/>
+
+                    <!-- Placeholder for the chart. -->
+                    <Frame CornerRadius="12" BackgroundColor="#4a4a4a" Padding="20" HeightRequest="250" WidthRequest="350">
+                        <Label Text="[Weight Tracker Chart Placeholder]"
+                               TextColor="White"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                    </Frame>
+
+                    <!-- Displaying the weight history in a list with an Edit button -->
+                    <Label Text="Weight History"
+                           TextColor="#bbdf32"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           Margin="0, 15, 0, 0"/>
+                    
+                    <Frame CornerRadius="12" BackgroundColor="#7a7a7a" Padding="10" WidthRequest="350">
+                        <CollectionView ItemsSource="{Binding WeightEntries}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10" ColumnDefinitions="*,Auto,Auto">
+                                        <Label Text="{Binding Date, StringFormat='{0:yyyy-MM-dd}'}"
+                                               FontSize="16"
+                                               TextColor="White"/>
+                                        <Label Text="{Binding Weight, StringFormat='{0:F1} lbs'}"
+                                               Grid.Column="1"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               TextColor="#bbdf32"/>
+                                        <Button Text="Edit"
+                                                Grid.Column="2"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:WeightTrackerViewModel}}, Path=EditWeightCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="#bbdf32"
+                                                TextColor="Black"
+                                                CornerRadius="5"
+                                                FontSize="12"
+                                                Margin="10,0,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Frame>
+                </VerticalStackLayout>
+                
             </VerticalStackLayout>
         </ScrollView>
 
