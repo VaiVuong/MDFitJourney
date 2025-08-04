@@ -3,6 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System;
+using System.Collections.Generic;
+using Microcharts;
+using SkiaSharp;
 
 namespace MDFitJourney.ViewModels
 {
@@ -25,9 +28,42 @@ namespace MDFitJourney.ViewModels
 
         public ObservableCollection<WeightEntry> WeightEntries { get; set; } = new ObservableCollection<WeightEntry>();
 
+        [ObservableProperty]
+        private Chart chart;
 
-        [RelayCommand]
-        private void SaveWeight()
+        public WeightTrackerViewModel()
+        {
+            UpdateChart();
+        }
+
+        private void UpdateChart()
+        {
+            var sortedEntries = WeightEntries.OrderBy(e => e.Date).ToList();
+            var chartEntries = new List<ChartEntry>();
+
+            foreach (var entry in sortedEntries)
+            {
+                chartEntries.Add(new ChartEntry((float)entry.Weight)
+                {
+                    Label = entry.Date.ToString("MM/dd"),
+                    ValueLabel = entry.Weight.ToString(),
+                    Color = SKColor.Parse("#bbdf32")
+                });
+            }
+
+            
+            Chart = new LineChart
+            {
+                Entries = chartEntries,
+                LineSize = 3,
+                PointSize = 10,
+                LabelColor = SKColors.White,
+                PointMode = PointMode.Circle,
+                BackgroundColor = SKColors.Transparent
+            };
+        }
+
+        public void SaveWeight()
         {
             if (double.TryParse(CurrentWeight, out double weightValue))
             {
@@ -54,22 +90,15 @@ namespace MDFitJourney.ViewModels
                     WeightEntries.Add(entry);
                 }
 
+               
+                UpdateChart();
+
                 CurrentWeight = string.Empty;
                 SelectedDate = DateTime.Today;
             }
             else
             {
                 Console.WriteLine("Invalid weight format. Please enter a number.");
-            }
-        }
-
-        [RelayCommand]
-        private void EditWeight(WeightEntry entry)
-        {
-            if (entry != null)
-            {
-                SelectedDate = entry.Date;
-                CurrentWeight = entry.Weight.ToString();
             }
         }
     }
