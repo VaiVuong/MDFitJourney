@@ -79,7 +79,7 @@
 
                     <!-- Placeholder for the chart. -->
                     <Frame CornerRadius="12" BackgroundColor="#4a4a4a" Padding="20" HeightRequest="250" WidthRequest="350">
-                        <microcharts:ChartView Chart="{Binding Chart}"/>
+                        <microcharts:ChartView Chart="{Binding WeightChart}"/>
                     </Frame>
 
                     <!-- Displaying the weight history in a list with an Edit button -->

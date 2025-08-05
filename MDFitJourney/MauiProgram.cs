@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MDFitJourney.ViewModels;
 using MDFitJourney.Pages;
+using Microcharts.Maui;
 
 namespace MDFitJourney
 {
@@ -11,6 +12,7 @@ namespace MDFitJourney
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMicrocharts()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
