@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MDFitJourney.ViewModels"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              x:Class="MDFitJourney.Pages.WeightTrackerPage"
              BackgroundColor="#2D2D2D"
              Title="Weight Tracker">
@@ -78,11 +79,7 @@
 
                     <!-- Placeholder for the chart. -->
                     <Frame CornerRadius="12" BackgroundColor="#4a4a4a" Padding="20" HeightRequest="250" WidthRequest="350">
-                        <Label Text="[Weight Tracker Chart Placeholder]"
-                               TextColor="White"
-                               FontSize="16"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"/>
+                        <microcharts:ChartView Chart="{Binding Chart}"/>
                     </Frame>
 
                     <!-- Displaying the weight history in a list with an Edit button -->
