@@ -35,10 +35,48 @@
                        FontAttributes="Bold" 
                        HorizontalTextAlignment="Center"/>
 
+                <Label Text="Our vision at FitJourney is all about creating a healthy you. Initially created in 2024, four students had a dream about creating an easily accessible health management app. We wanted to create an environment where managing your weight loss journey was stress-free and simple."
+                       FontSize="14"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
                 <Label Text="Terms of Service"
                        FontSize="18"
                        TextColor="#bbdf32"
                        FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="1. Agreement to Terms"
+                       FontSize="14"
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="By creating an account and using this app, you accept an agreement to follow our following terms. If you do not agree, you will not be allowed to use the application."
+                       FontSize="12"
+                       TextColor="White" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="2. Privacy Policy"
+                       FontSize="14"
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="Our users' data security and privacy is very important to us. We promise to never use your data for outside means and personal collection. In accordance to regulations, we only use user data to build better health journeys for other users and you. By using this app, you agree to let FitJourney use your data to only help calculate better health profiles/recommendations for it's users."
+                       FontSize="12"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="3. Limitations of Liability"
+                       FontSize="14"
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="FitJourney is not responsible for any physical injury that occurs to a user. The supplied routines are recommendations and should always be followed through with the proper form and etiquette by the users. We never encourage users to over work and potentially put themselves in danger."
+                       FontSize="12"
+                       TextColor="White"
                        HorizontalTextAlignment="Center"/>
 
                 <Label Text="Feedback"
@@ -74,6 +112,39 @@
                        FontSize="18"
                        TextColor="#bbdf32"
                        FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="1. Does FitJourney have any in-app purchases/subscriptions?"
+                       FontSize="14"
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="FitJourney is completely free to use! We believe in delivering the best quality fitness tracking system with no cost!"
+                       FontSize="12"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="2. What should I do if I have a recommendation for the FitJourney app?"
+                       FontSize="14"
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="If you have a recommendation or feature request, please use the feedback box in the Information Page! We want to continue to grow and we cannot do that without the support/feedback of our users!"
+                       FontSize="12"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="3. What should I do if a recommended FitJourney routine doesn't work for me?"
+                       FontSize="14"
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="We are confident that this is very unlikely but there is always a small possibility. Everyone's bodies are different so we need to figure out what works for you specifically! By reaching out in the feedback box, we will contact you and personally try to solve this problem with you!"
+                       FontSize="12"
+                       TextColor="White"
                        HorizontalTextAlignment="Center"/>
 
             </VerticalStackLayout>
