@@ -28,26 +28,54 @@
         <!-- Main Content -->
         <ScrollView Grid.Row="1" Padding="20">
             <VerticalStackLayout Spacing="15">
+
                 <Label Text="About Us"
                        FontSize="18"
                        TextColor="#bbdf32"
                        FontAttributes="Bold" 
                        HorizontalTextAlignment="Center"/>
+
                 <Label Text="Terms of Service"
                        FontSize="18"
                        TextColor="#bbdf32"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center"/>
+
                 <Label Text="Feedback"
                        FontSize="18"
                        TextColor="#bbdf32"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center"/>
+
+                <!-- Feedback Box -->
+                <Frame BackgroundColor="#1E1E1E"
+                       BorderColor="#bbdf32"
+                       CornerRadius="10"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Editor x:Name="FeedbackEditor"
+                                Placeholder="Type your feedback here..."
+                                PlaceholderColor="#888"
+                                TextColor="White"
+                                AutoSize="TextChanges"
+                                BackgroundColor="#2D2D2D"
+                                HeightRequest="100" />
+
+                        <Button Text="Submit Feedback"
+                                BackgroundColor="#bbdf32"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                CornerRadius="5"
+                                Clicked="OnSubmitFeedbackClicked"/>
+                    </VerticalStackLayout>
+                </Frame>
+
                 <Label Text="FAQ"
                        FontSize="18"
                        TextColor="#bbdf32"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center"/>
+
             </VerticalStackLayout>
         </ScrollView>
 
@@ -62,19 +90,19 @@
             </Grid.ColumnDefinitions>
 
             <ImageButton Source="hamburger.png"
-                 Clicked="GoToHome_Clicked"
-                 Grid.Column="0"/>
+                         Clicked="GoToHome_Clicked"
+                         Grid.Column="0"/>
             <ImageButton Source="bookmark.png"
-                 Grid.Column="1"/>
+                         Grid.Column="1"/>
             <ImageButton Source="addweight.png"
-                 Clicked="AddWeight_Clicked"
-                 Grid.Column="2"/>
+                         Clicked="AddWeight_Clicked"
+                         Grid.Column="2"/>
             <ImageButton Source="chart.png"
-                 Clicked="GoToWeightTracker_Clicked"
-                 Grid.Column="3"/>
+                         Clicked="GoToWeightTracker_Clicked"
+                         Grid.Column="3"/>
             <ImageButton Source="info.png"
-                 Clicked="GoToInfo_Clicked"
-                 Grid.Column="4"/>
+                         Clicked="GoToInfo_Clicked"
+                         Grid.Column="4"/>
         </Grid>
     </Grid>
 </ContentPage>
