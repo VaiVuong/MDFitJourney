@@ -77,7 +77,7 @@
                            FontAttributes="Bold"
                            HorizontalTextAlignment="Center"/>
 
-                    <!-- Placeholder for the chart. -->
+                    <!-- Weight Chart -->
                     <Frame CornerRadius="12" BackgroundColor="#4a4a4a" Padding="20" HeightRequest="250" WidthRequest="350">
                         <microcharts:ChartView Chart="{Binding WeightChart}"/>
                     </Frame>
