@@ -37,7 +37,6 @@ public partial class InformationPage : ContentPage
             return;
         }
 
-        // Optionally, save the feedback locally for later review
         string path = Path.Combine(FileSystem.AppDataDirectory, "feedback.txt");
         File.AppendAllText(path, feedback + Environment.NewLine);
 
